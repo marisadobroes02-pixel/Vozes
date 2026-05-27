@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produção do Recurso Educativo Digital Intergeracional</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: #2a2a2a;
+    --text: #e8e2d9;
+    --text-mid: #a09890;
+    --text-soft: #5c5550;
+    --cyan: #00c9b1;
+    --cyan-dim: rgba(0,201,177,0.08);
+    --amber: #f0a500;
+    --amber-dim: rgba(240,165,0,0.08);
+    --rose: #e8456a;
+    --rose-dim: rgba(232,69,106,0.08);
+    --violet: #9b7fe8;
+    --violet-dim: rgba(155,127,232,0.08);
+    --green: #4ec994;
+    --green-dim: rgba(78,201,148,0.08);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,177,0.12) 0%, transparent 65%);
+    top: -150px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,69,106,0.08) 0%, transparent 65%);
+    bottom: 0; left: -50px;
+    pointer-events: none;
+  }
+
+  .hero-top {
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .hero-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-doc-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-doc-type::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: var(--cyan);
+    opacity: 0.4;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .hero-title .accent { color: var(--cyan); }
+  .hero-title .soft { color: var(--text-soft); font-weight: 400; }
+
+  .hero-subtitle {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--text-mid);
+    max-width: 580px;
+    line-height: 1.7;
+    border-left: 2px solid var(--cyan);
+    padding-left: 1.2rem;
+    font-style: italic;
+  }
+
+  .hero-bottom {
+    padding: 2rem 4rem;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .hero-stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 4rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .div-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+
+  .div-line { flex: 0 0 40px; height: 1px; background: var(--border); }
+
+  .div-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-mid);
+  }
+
+  /* ── PAGE ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 3.5rem 4rem; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .section-lead {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  /* ── STACK TÉCNICO ── */
+  .tech-stack {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .tech-card {
+    background: var(--surface);
+    padding: 2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .tech-card:hover { background: var(--surface2); }
+
+  .tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+  }
+
+  .tc-cyan::before   { background: var(--cyan); }
+  .tc-amber::before  { background: var(--amber); }
+  .tc-rose::before   { background: var(--rose); }
+  .tc-violet::before { background: var(--violet); }
+  .tc-green::before  { background: var(--green); }
+  .tc-text::before   { background: var(--text-mid); }
+
+  .tech-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .tech-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 0.4rem;
+  }
+
+  .tech-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .tech-desc {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tech-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    border-radius: 2px;
+  }
+
+  /* ── INTERATIVIDADE ── */
+  .interact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .interact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .interact-item {
+    padding: 1.8rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .interact-item:hover { background: var(--surface2); }
+  .interact-item:last-child { border-bottom: none; }
+
+  .interact-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 500;
+    color: var(--cyan);
+    padding-top: 0.15rem;
+  }
+
+  .interact-content h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .interact-content p {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+
+  .interact-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .it-cyan   { background: var(--cyan-dim); color: var(--cyan); }
+  .it-amber  { background: var(--amber-dim); color: var(--amber); }
+  .it-rose   { background: var(--rose-dim); color: var(--rose); }
+  .it-violet { background: var(--violet-dim); color: var(--violet); }
+  .it-green  { background: var(--green-dim); color: var(--green); }
+
+  /* ── TERMINAL BLOCK ── */
+  .terminal {
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.8;
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background: var(--surface2);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .term-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .term-dot.r { background: #ff5f56; }
+  .term-dot.y { background: #ffbd2e; }
+  .term-dot.g { background: #27c93f; }
+
+  .terminal-title {
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-left: 0.5rem;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    color: #7ec8a0;
+  }
+
+  .term-comment { color: var(--text-soft); }
+  .term-key     { color: var(--cyan); }
+  .term-val     { color: var(--amber); }
+  .term-str     { color: #e8a87c; }
+  .term-bool    { color: var(--rose); }
+  .term-num     { color: var(--violet); }
+
+  /* ── ACESSIBILIDADE ── */
+  .access-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .access-card {
+    background: var(--surface);
+    padding: 2rem 1.8rem;
+    transition: background 0.2s;
+  }
+
+  .access-card:hover { background: var(--surface2); }
+
+  .access-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .access-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .ai-cyan   { background: var(--cyan-dim); }
+  .ai-amber  { background: var(--amber-dim); }
+  .ai-rose   { background: var(--rose-dim); }
+  .ai-violet { background: var(--violet-dim); }
+  .ai-green  { background: var(--green-dim); }
+  .ai-grey   { background: var(--surface2); }
+
+  .access-header-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .access-header-text span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .access-list {
+    list-style: none;
+  }
+
+  .access-list li {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .access-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 0.55rem;
+    top: 0.55rem;
+  }
+
+  .access-list li:last-child { border-bottom: none; }
+
+  .wcag-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-top: 0.8rem;
+    border: 1px solid;
+  }
+
+  .wcag-aa  { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+  .wcag-aaa { color: var(--cyan); border-color: var(--cyan); background: var(--cyan-dim); }
+
+  /* ── DESIGN VISUAL ── */
+  .design-showcase {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .design-principles {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .design-item {
+    padding: 1.5rem 1.8rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .design-item:last-child { border-bottom: none; }
+
+  .design-bullet {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .db-c { background: var(--cyan); }
+  .db-a { background: var(--amber); }
+  .db-r { background: var(--rose); }
+  .db-v { background: var(--violet); }
+  .db-g { background: var(--green); }
+
+  .design-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .design-text p {
+    font-size: 0.76rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* COLOR PALETTE */
+  .palette-block {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .palette-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .palette-swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .swatch-color {
+    height: 36px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .swatch-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* TYPOGRAPHY BLOCK */
+  .type-showcase {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .type-row {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-example { font-size: 1.2rem; color: var(--text); }
+  .type-spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--text-soft);
+    text-align: right;
+    line-height: 1.8;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── COMPONENTES UI ── */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .comp-card {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .comp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .comp-desc {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    line-height: 1.55;
+  }
+
+  /* Simulação visual de componentes */
+  .sim-quiz {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  .sim-quiz-q {
+    font-size: 0.72rem;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .sim-option {
+    font-size: 0.65rem;
+    color: var(--text-mid);
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 0.35rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .sim-option:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+  .sim-option.correct { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+  .sim-option.wrong   { border-color: var(--rose); color: var(--rose); background: var(--rose-dim); }
+
+  .sim-progress {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.8rem;
+  }
+
+  .sim-progress-fill {
+    height: 100%;
+    background: var(--cyan);
+    border-radius: 2px;
+    width: 62%;
+  }
+
+  .sim-badge {
+    background: var(--cyan-dim);
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin: 0 auto;
+  }
+
+  .sim-badge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .sim-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.8rem;
+  }
+
+  .sim-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .sim-card-body {
+    font-size: 0.62rem;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+
+  .sim-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    background: var(--cyan);
+    color: #000;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  /* ── CHECKLIST TÉCNICA ── */
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .check-group h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .check-group ul { list-style: none; }
+
+  .check-group ul li {
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    padding: 0.35rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.45;
+  }
+
+  .check-group ul li:last-child { border-bottom: none; }
+
+  .check-group ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+  .check-group ul li.pending::before {
+    content: '○';
+    color: var(--text-soft);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .fl {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-mid);
+  }
+
+  footer .fl span { color: var(--cyan); }
+
+  footer .fr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-align: right;
+    line-height: 2.2;
+  }
+
+  @media (max-width: 768px) {
+    .hero-main, .hero-top, .hero-bottom, .page, .divider { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .tech-stack, .components-grid { grid-template-columns: 1fr; }
+    .access-grid { grid-template-columns: 1fr; }
+    .interact-layout, .design-showcase, .checklist { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-top">
+    <div class="hero-ref">RED-IGI · DOC-002 · 2026</div>
+    <div class="hero-status">Em desenvolvimento</div>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-doc-type">Produção Técnica do Recurso</div>
+    <h1 class="hero-title">
+      Desenvolvimento<br>
+      <span class="accent">Técnico</span><br>
+      <span class="soft">do Recurso Digital</span>
+    </h1>
+    <p class="hero-subtitle">
+      Arquitetura de interatividade, princípios de acessibilidade universal 
+      e sistema de design visual para o Recurso Educativo Digital Intergeracional 
+      na Era da IA.
+    </p>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-stat">
+      <div class="hero-stat-val">8</div>
+      <div class="hero-stat-label">Módulos interativos</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">WCAG 2.1 AA</div>
+      <div class="hero-stat-label">Nível de acessibilidade</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">4</div>
+      <div class="hero-stat-label">Perfis geracionais de UX</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">Multi</div>
+      <div class="hero-stat-label">Plataforma (web, mobile, offline)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">DUA</div>
+      <div class="hero-stat-label">Design Universal para a Aprendizagem</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 01 · STACK TÉCNICO ══════════ -->
+<div class="divider">
+  <span class="div-num">01</span>
+  <div class="div-line"></div>
+  <span class="div-title">Arquitetura e Stack Tecnológico</span>
+</div>
+
+<div class="page">
+  <span class="section-eyebrow">Fundação técnica</span>
+  <h2 class="section-title">Arquitetura do Recurso</h2>
+  <p class="section-lead">
+    O recurso assenta numa arquitetura web-first progressiva, garantindo acessibilidade 
+    universal, performance em dispositivos de baixo custo e funcionamento parcial offline 
+    — requisitos fundamentais para a inclusão de todas as gerações.
+  </p>
+
+  <div class="tech-stack">
+    <div class="tech-card tc-cyan">
+      <span class="tech-icon">🌐</span>
+      <div class="tech-category">Frontend</div>
+      <div class="tech-name">Progressive Web App (PWA)</div>
+      <p class="tech-desc">Aplicação web progressiva instalável em qualquer dispositivo — smartphone, tablet ou computador. Funciona parcialmente sem internet para contextos de conectividade limitada.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3</span>
+        <span class="tech-tag">Vanilla JS</span>
+        <span class="tech-tag">Service Workers</span>
+        <span class="tech-tag">IndexedDB</span>
+      </div>
+    </div>
+    <div class="tech-card tc-amber">
+      <span class="tech-icon">⚙️</span>
+      <div class="tech-category">Backend</div>
+      <div class="tech-name">API REST + Base de Dados</div>
+      <p class="tech-desc">Sistema de gestão de utilizadores, progresso e conteúdos com API REST segura. Suporte a perfis individuais e familiares com sincronização entre dispositivos.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">PostgreSQL</span>
+        <span class="tech-tag">JWT Auth</span>
+        <span class="tech-tag">REST API</span>
+        <span class="tech-tag">HTTPS</span>
+      </div>
+    </div>
+    <div class="tech-card tc-rose">
+      <span class="tech-icon">📱</span>
+      <div class="tech-category">Mobile</div>
+      <div class="tech-name">Design Responsivo Adaptativo</div>
+      <p class="tech-desc">Interface otimizada para todos os tamanhos de ecrã com ajustes específicos para utilizadores idosos — área de toque maior, tipografia escalável, contraste elevado.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Responsive</span>
+        <span class="tech-tag">Touch-first</span>
+        <span class="tech-tag">iOS / Android</span>
+        <span class="tech-tag">Font scaling</span>
+      </div>
+    </div>
+    <div class="tech-card tc-violet">
+      <span class="tech-icon">♿</span>
+      <div class="tech-category">Acessibilidade</div>
+      <div class="tech-name">WCAG 2.1 AA / AAA</div>
+      <p class="tech-desc">Conformidade com as diretrizes de acessibilidade web WCAG 2.1, nível AA (mínimo) e AAA onde possível. Compatibilidade total com leitores de ecrã e tecnologias assistivas.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">ARIA</span>
+        <span class="tech-tag">Screen readers</span>
+        <span class="tech-tag">Teclado nav.</span>
+        <span class="tech-tag">Alto contraste</span>
+      </div>
+    </div>
+    <div class="tech-card tc-green">
+      <span class="tech-icon">🔒</span>
+      <div class="tech-category">Privacidade e Segurança</div>
+      <div class="tech-name">Privacy by Design</div>
+      <p class="tech-desc">Conformidade com RGPD, dados mínimos necessários, consentimento informado, opção de uso anónimo e dados de menores protegidos com autorizações parentais.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">RGPD</span>
+        <span class="tech-tag">Dados mínimos</span>
+        <span class="tech-tag">Consent Manager</span>
+        <span class="tech-tag">Encriptação</span>
+      </div>
+    </div>
+    <div class="tech-card tc-text">
+      <span class="tech-icon">🔄</span>
+      <div class="tech-category">Conteúdo</div>
+      <div class="tech-name">CMS Headless</div>
+      <p class="tech-desc">Sistema de gestão de conteúdos desacoplado que permite atualizar módulos, adicionar conteúdo e publicar alertas sem necessidade de redeploy técnico.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">CMS Headless</span>
+        <span class="tech-tag">Markdown</span>
+        <span class="tech-tag">Versionamento</span>
+        <span class="tech-tag">Multi-idioma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminal block -->
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="term-dot r"></span>
+      <span class="term-dot y"></span>
+      <span class="term-dot g"></span>
+      <span class="terminal-title">config/recurso.json — Configuração Base do Sistema</span>
+    </div>
+    <div class="terminal-body">
+<span class="term-comment">// Configuração base do Recurso Educativo Digital Intergeracional</span><br>
+{<br>
+&nbsp;&nbsp;<span class="term-key">"nome"</span>: <span class="term-str">"RED-Intergeracional"</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"versao"</span>: <span class="term-str">"1.0.0"</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"geracoes_suportadas"</span>: [<span class="term-str">"boomers"</span>, <span class="term-str">"gen_x"</span>, <span class="term-str">"millennials"</span>, <span class="term-str">"gen_z"</span>],<br>
+&nbsp;&nbsp;<span class="term-key">"modulos"</span>: <span class="term-num">8</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"acessibilidade"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="term-key">"wcag"</span>: <span class="term-str">"2.1-AA"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="term-key">"screen_reader"</span>: <span class="term-bool">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="term-key">"alto_contraste"</span>: <span class="term-bool">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="term-key">"tamanho_fonte_adaptativo"</span>: <span class="term-bool">true</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="term-key">"offline_mode"</span>: <span class="term-bool">true</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"perfis_familiares"</span>: <span class="term-bool">true</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"gamificacao"</span>: <span class="term-bool">true</span>,<br>
+&nbsp;&nbsp;<span class="term-key">"atualizacao_continua"</span>: <span class="term-bool">true</span><br>
+}
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 02 · INTERATIVIDADE ══════════ -->
+<div class="divider">
+  <span class="div-num">02</span>
+  <div class="div-line"></div>
+  <span class="div-title">Interatividade e Experiência de Utilizador</span>
+</div>
+
+<div class="page">
+  <span class="section-eyebrow">UX / Engagement</span>
+  <h2 class="section-title">Mecanismos de Interatividade</h2>
+  <p class="section-lead">
+    A interatividade é o veículo da aprendizagem — cada mecânica foi desenhada 
+    para responder a um objetivo pedagógico concreto, evitando interatividade 
+    decorativa sem valor formativo.
+  </p>
+
+  <div class="interact-layout">
+    <div class="interact-items">
+      <div class="interact-item">
+        <span class="interact-num">01</span>
+        <div class="interact-content">
+          <h4>Simulações de Cenários Reais</h4>
+          <p>O utilizador é colocado em situações do quotidiano digital — uma mensagem suspeita, uma notícia viral, uma interação com IA — e deve tomar decisões. O sistema fornece feedback imediato e contextualizado, não apenas "certo/errado".</p>
+          <span class="interact-tag it-cyan">Aprendizagem imersiva</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">02</span>
+        <div class="interact-content">
+          <h4>Quizzes Adaptativos por Geração</h4>
+          <p>Perguntas de escolha múltipla, verdadeiro/falso e arrasto com linguagem e exemplos ajustados ao perfil geracional. O sistema adapta a dificuldade com base no desempenho anterior do utilizador.</p>
+          <span class="interact-tag it-amber">Avaliação formativa</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">03</span>
+        <div class="interact-content">
+          <h4>Detector de Deepfakes e Desinformação</h4>
+          <p>Ferramenta interativa onde o utilizador analisa imagens, vídeos e textos para identificar sinais de manipulação. Com pistas progressivas que ensinam a observar criticamente o conteúdo digital.</p>
+          <span class="interact-tag it-rose">Pensamento crítico</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">04</span>
+        <div class="interact-content">
+          <h4>Missões Intergeracionais Partilhadas</h4>
+          <p>Atividades que requerem a participação simultânea ou sequencial de dois utilizadores de gerações distintas — cada um contribuindo com conhecimentos complementares para completar a missão.</p>
+          <span class="interact-tag it-violet">Colaboração</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">05</span>
+        <div class="interact-content">
+          <h4>Sistema de Distintivos e Progressão</h4>
+          <p>Badges ganhos por conclusão de módulos e atividades especiais. Mapa visual de progressão individual e familiar. Certificado digital de competências ao completar o percurso intergeracional.</p>
+          <span class="interact-tag it-green">Motivação e reconhecimento</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">06</span>
+        <div class="interact-content">
+          <h4>Diário de Reflexão Digital</h4>
+          <p>Espaço opcional para registo de aprendizagens, dúvidas e experiências pessoais após cada módulo. Promove a metacognição e cria um arquivo pessoal da jornada de literacia digital.</p>
+          <span class="interact-tag it-amber">Metacognição</span>
+        </div>
+      </div>
+      <div class="interact-item">
+        <span class="interact-num">07</span>
+        <div class="interact-content">
+          <h4>Explorador de IA — "Laboratório"</h4>
+          <p>Ambiente seguro e guiado onde o utilizador experimenta ferramentas de IA generativa — criar texto, analisar enviesamentos, testar prompts — com orientação pedagógica integrada que contextualiza cada experiência.</p>
+          <span class="interact-tag it-cyan">Literacia de IA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Componentes simulados -->
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <div class="comp-card" style="border:1px solid var(--border);background:var(--surface);">
+        <div class="comp-label">Componente · Quiz Interativo</div>
+        <div class="sim-quiz">
+          <div class="sim-quiz-q">Qual destes sinais pode indicar uma notícia falsa?</div>
+          <div class="sim-option correct">✓ Título sensacionalista com maiúsculas</div>
+          <div class="sim-option wrong">✗ Publicada há mais de 24h</div>
+          <div class="sim-option">Partilhada por um familiar</div>
+          <div class="sim-progress"><div class="sim-progress-fill"></div></div>
+        </div>
+        <div class="comp-desc">Feedback imediato com explicação contextualizada — não apenas certo ou errado.</div>
+      </div>
+
+      <div class="comp-card" style="border:1px solid var(--border);background:var(--surface);">
+        <div class="comp-label">Componente · Sistema de Distintivos</div>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <div style="text-align:center">
+            <div class="sim-badge">🔍</div>
+            <div class="sim-badge-label">Verificador</div>
+          </div>
+          <div style="text-align:center">
+            <div class="sim-badge" style="border-color:var(--amber);background:var(--amber-dim);">🛡️</div>
+            <div class="sim-badge-label" style="color:var(--amber);">Protetor</div>
+          </div>
+          <div style="text-align:center">
+            <div class="sim-badge" style="border-color:var(--violet);background:var(--violet-dim);">🤝</div>
+            <div class="sim-badge-label" style="color:var(--violet);">Mediador</div>
+          </div>
+        </div>
+        <div class="comp-desc">Distintivos conquistados por competência — não por tempo de uso.</div>
+      </div>
+
+      <div class="comp-card" style="border:1px solid var(--border);background:var(--surface);">
+        <div class="comp-label">Componente · Missão Familiar</div>
+        <div class="sim-card">
+          <div class="sim-card-title">🎯 Missão: Verificar Juntos</div>
+          <div class="sim-card-body">Um familiar mais novo e um mais velho analisam uma notícia viral. Cada um contribui com o que sabe: o jovem com ferramentas digitais, o sénior com contexto histórico.</div>
+          <button class="sim-btn">Iniciar missão →</button>
+        </div>
+        <div class="comp-desc">Requer dois utilizadores de gerações distintas para completar.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 03 · ACESSIBILIDADE ══════════ -->
+<div class="divider">
+  <span class="div-num">03</span>
+  <div class="div-line"></div>
+  <span class="div-title">Acessibilidade Universal</span>
+</div>
+
+<div class="page">
+  <span class="section-eyebrow">Inclusão digital</span>
+  <h2 class="section-title">Acessibilidade como Princípio</h2>
+  <p class="section-lead">
+    Um recurso intergeracional que não seja plenamente acessível falha na sua missão 
+    mais básica. A acessibilidade não é um add-on — é uma condição de design desde 
+    o primeiro rascunho.
+  </p>
+
+  <div class="access-grid">
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-cyan">👁️</div>
+        <div class="access-header-text">
+          <h4>Acessibilidade Visual</h4>
+          <span>Visão reduzida · Baixa visão · Daltonismo</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Rácio de contraste mínimo 4.5:1 (texto normal) e 3:1 (texto grande)</li>
+        <li>Modo de alto contraste ativável pelo utilizador</li>
+        <li>Tipografia escalável de 100% a 200% sem perda de layout</li>
+        <li>Paleta de cores segura para os tipos mais comuns de daltonismo</li>
+        <li>Informação nunca transmitida apenas por cor</li>
+        <li>Texto alternativo detalhado em todas as imagens e ícones</li>
+      </ul>
+      <span class="wcag-badge wcag-aa">WCAG 2.1 AA</span>
+    </div>
+
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-amber">👂</div>
+        <div class="access-header-text">
+          <h4>Acessibilidade Auditiva</h4>
+          <span>Surdez · Hipoacusia · Preferência textual</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Legendas em todos os conteúdos de vídeo e áudio</li>
+        <li>Transcrição textual completa de podcasts e narração</li>
+        <li>Conteúdo disponível em formato de texto além do audiovisual</li>
+        <li>Alertas e notificações com sinais visuais além do sonoro</li>
+        <li>Linguagem Gestual Portuguesa (LGP) em módulos prioritários</li>
+      </ul>
+      <span class="wcag-badge wcag-aa">WCAG 2.1 AA</span>
+    </div>
+
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-rose">🖐️</div>
+        <div class="access-header-text">
+          <h4>Acessibilidade Motora</h4>
+          <span>Mobilidade reduzida · Tremor · Dexteridade limitada</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Navegação completa por teclado sem necessidade de rato</li>
+        <li>Áreas de toque mínimas de 44×44px em dispositivos móveis</li>
+        <li>Sem tarefas que requeiram precisão de ponteiro elevada</li>
+        <li>Compatibilidade com software de controlo por voz (Voice Control)</li>
+        <li>Sem limites de tempo que penalizem utilizadores mais lentos</li>
+        <li>Foco visível e consistente em todos os elementos interativos</li>
+      </ul>
+      <span class="wcag-badge wcag-aa">WCAG 2.1 AA</span>
+    </div>
+
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-violet">🧠</div>
+        <div class="access-header-text">
+          <h4>Acessibilidade Cognitiva</h4>
+          <span>Literacia baixa · Dislexia · Envelhecimento cognitivo</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Linguagem clara e simples (leitura nível A2-B1 nos módulos base)</li>
+        <li>Estrutura de conteúdo previsível e consistente entre módulos</li>
+        <li>Instruções passo a passo com confirmação antes de avançar</li>
+        <li>Opção de leitura facilitada (fonte OpenDyslexic, espaçamento aumentado)</li>
+        <li>Nunca remover ou mover elementos UI entre interações</li>
+        <li>Sem autoplay de conteúdos que distraiam da tarefa principal</li>
+      </ul>
+      <span class="wcag-badge wcag-aaa">WCAG 2.1 AAA (parcial)</span>
+    </div>
+
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-green">📡</div>
+        <div class="access-header-text">
+          <h4>Acessibilidade Digital Técnica</h4>
+          <span>Dispositivos antigos · Baixa largura de banda · Offline</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Funcional em dispositivos com Android 7+ e iOS 12+</li>
+        <li>Modo offline com conteúdo pré-descarregado</li>
+        <li>Versão de baixa largura de banda (imagens comprimidas, sem vídeo)</li>
+        <li>Dimensão mínima de ecrã suportada: 320px</li>
+        <li>Performance adequada em dispositivos com 2GB de RAM</li>
+      </ul>
+      <span class="wcag-badge wcag-aa">Conformidade técnica</span>
+    </div>
+
+    <div class="access-card">
+      <div class="access-header">
+        <div class="access-icon ai-grey">🔊</div>
+        <div class="access-header-text">
+          <h4>Tecnologias Assistivas</h4>
+          <span>Leitores de ecrã · Ampliadores · Voz</span>
+        </div>
+      </div>
+      <ul class="access-list">
+        <li>Compatibilidade com NVDA, JAWS, VoiceOver (iOS/macOS) e TalkBack (Android)</li>
+        <li>Marcação semântica HTML5 com ARIA roles e labels</li>
+        <li>Ordem de leitura lógica e consistente com a ordem visual</li>
+        <li>Títulos de página únicos e descritivos em cada secção</li>
+        <li>Skip links para saltar navegação repetitiva</li>
+        <li>Testes regulares com utilizadores que dependem de tecnologias assistivas</li>
+      </ul>
+      <span class="wcag-badge wcag-aa">WCAG 2.1 AA</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 04 · DESIGN VISUAL ══════════ -->
+<div class="divider">
+  <span class="div-num">04</span>
+  <div class="div-line"></div>
+  <span class="div-title">Sistema de Design Visual</span>
+</div>
+
+<div class="page">
+  <span class="section-eyebrow">Identidade visual e UX</span>
+  <h2 class="section-title">Design Visual do Recurso</h2>
+  <p class="section-lead">
+    O sistema de design concilia clareza universal com carácter visual distinto — 
+    acessível a todas as gerações sem ser genérico, moderno sem ser excludente.
+  </p>
+
+  <div class="design-showcase">
+    <div class="design-principles">
+      <div class="design-item">
+        <div class="design-bullet db-c"></div>
+        <div class="design-text">
+          <h4>Tipografia Geracional Adaptativa</h4>
+          <p>Fonte principal com excelente legibilidade em ecrã (nunca serifada em corpo de texto). Tamanho base de 18px para módulos orientados a seniores, 16px para perfis jovens. Escalonamento com CSS rem para respeitar preferências do sistema operativo.</p>
+        </div>
+      </div>
+      <div class="design-item">
+        <div class="design-bullet db-a"></div>
+        <div class="design-text">
+          <h4>Sistema Cromático com Semântica Clara</h4>
+          <p>Cada geração tem uma cor de identidade dentro da paleta global. Cores funcionais padronizadas: verde para sucesso, âmbar para atenção, vermelho para erro — nunca invertidas. Modo claro (padrão sénior) e modo escuro (padrão jovem).</p>
+        </div>
+      </div>
+      <div class="design-item">
+        <div class="design-bullet db-r"></div>
+        <div class="design-text">
+          <h4>Iconografia Universal e Consistente</h4>
+          <p>Biblioteca de ícones com significado auto-evidente — testados com utilizadores de 60+ anos. Ícones sempre acompanhados de label textual. Sem metáforas culturalmente específicas ou tecnicamente codificadas.</p>
+        </div>
+      </div>
+      <div class="design-item">
+        <div class="design-bullet db-v"></div>
+        <div class="design-text">
+          <h4>Layout Espaçoso com Hierarquia Forte</h4>
+          <p>Espaçamento generoso entre elementos, especialmente nos módulos orientados a seniores. Hierarquia visual clara — título, subtítulo, corpo, nota — sem ambiguidade sobre o que ler a seguir. Conteúdo não concorrente na mesma vista.</p>
+        </div>
+      </div>
+      <div class="design-item">
+        <div class="design-bullet db-g"></div>
+        <div class="design-text">
+          <h4>Animações com Propósito e Respeito</h4>
+          <p>Animações usadas apenas quando melhoram a compreensão ou o feedback (ex: progresso, confirmação de ação). Respeito por prefers-reduced-motion — utilizadores com sensibilidade a movimento veem versão estática. Sem animações de distração.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <!-- Paleta -->
+      <div class="palette-block">
+        <div class="palette-label">Paleta de Cores do Sistema</div>
+        <div class="palette-swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background:#00c9b1"></div>
+            <div class="swatch-name">Teal<br>#00c9b1</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#f0a500"></div>
+            <div class="swatch-name">Amber<br>#f0a500</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#e8456a"></div>
+            <div class="swatch-name">Rose<br>#e8456a</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#9b7fe8"></div>
+            <div class="swatch-name">Violet<br>#9b7fe8</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#4ec994"></div>
+            <div class="swatch-name">Green<br>#4ec994</div>
+          </div>
+        </div>
+        <div class="palette-swatches" style="margin-top:0.5rem;">
+          <div class="swatch">
+            <div class="swatch-color" style="background:#f8f6f1;border:1px solid #ccc"></div>
+            <div class="swatch-name">Papel<br>#f8f6f1</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#1a1a1a"></div>
+            <div class="swatch-name">Tinta<br>#1a1a1a</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#3d3d3d"></div>
+            <div class="swatch-name">Médio<br>#3d3d3d</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#a09890"></div>
+            <div class="swatch-name">Suave<br>#a09890</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#ddd8ce"></div>
+            <div class="swatch-name">Linha<br>#ddd8ce</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipografia -->
+      <div class="type-showcase">
+        <div class="palette-label">Sistema Tipográfico</div>
+        <div class="type-row">
+          <span class="type-example" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.02em;">Título</span>
+          <div class="type-spec">Syne 800<br>display / heading<br>-0.02em tracking</div>
+        </div>
+        <div class="type-row">
+          <span class="type-example" style="font-family:'Lora',serif;font-size:1rem;">Corpo de texto</span>
+          <div class="type-spec">Lora 400<br>body / reading<br>1.75 line-height</div>
+        </div>
+        <div class="type-row">
+          <span class="type-example" style="font-family:'Lora',serif;font-style:italic;font-size:0.95rem;">Citação ou destaque</span>
+          <div class="type-spec">Lora Italic 400<br>pull quotes<br>emphasis</div>
+        </div>
+        <div class="type-row">
+          <span class="type-example" style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;">LABEL / CÓDIGO</span>
+          <div class="type-spec">JetBrains Mono<br>labels / meta<br>0.1em tracking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 05 · CHECKLIST TÉCNICA ══════════ -->
+<div class="divider">
+  <span class="div-num">05</span>
+  <div class="div-line"></div>
+  <span class="div-title">Checklist Técnica de Desenvolvimento</span>
+</div>
+
+<div class="page">
+  <span class="section-eyebrow">Controlo de qualidade</span>
+  <h2 class="section-title">Checklist de Produção</h2>
+  <p class="section-lead">
+    Lista de verificação técnica para garantir que o recurso cumpre os requisitos 
+    de qualidade, acessibilidade e pedagogia antes do lançamento.
+  </p>
+
+  <div class="checklist">
+    <div class="check-group">
+      <h5>Interatividade e Funcionalidade</h5>
+      <ul>
+        <li>Diagnóstico inicial gera percurso personalizado por geração</li>
+        <li>Quizzes com feedback imediato e explicação contextualizada</li>
+        <li>Simuladores de deepfake e phishing funcionais</li>
+        <li>Missões familiares requerem 2 perfis de gerações distintas</li>
+        <li>Sistema de distintivos atribuídos por competência</li>
+        <li>Diário de reflexão com guardar automático</li>
+        <li>Explorador de IA com prompts guiados</li>
+        <li class="pending">Integração com fact-checkers externos (em desenvolvimento)</li>
+      </ul>
+    </div>
+    <div class="check-group">
+      <h5>Acessibilidade e Inclusão</h5>
+      <ul>
+        <li>Conformidade WCAG 2.1 AA verificada com axe-core</li>
+        <li>Testado com NVDA, VoiceOver e TalkBack</li>
+        <li>Navegação completa por teclado verificada</li>
+        <li>Contraste de cor validado em todos os componentes</li>
+        <li>prefers-reduced-motion respeitado</li>
+        <li>Legendas em todos os conteúdos audiovisuais</li>
+        <li class="pending">Versão LGP — módulos prioritários (em produção)</li>
+        <li class="pending">Testes com utilizadores reais 65+ (agendados)</li>
+      </ul>
+    </div>
+    <div class="check-group">
+      <h5>Design Visual e UX</h5>
+      <ul>
+        <li>Sistema de design documentado e implementado</li>
+        <li>Modo claro e modo escuro funcionais</li>
+        <li>Responsive em 320px, 768px, 1024px e 1440px</li>
+        <li>Tipografia escalável com rem/em</li>
+        <li>Iconografia testada com utilizadores não-tech</li>
+        <li>Animações com prefers-reduced-motion</li>
+        <li class="pending">Testes de usabilidade A/B (agendados)</li>
+      </ul>
+    </div>
+    <div class="check-group">
+      <h5>Performance e Segurança</h5>
+      <ul>
+        <li>PWA instalável com Service Worker</li>
+        <li>Modo offline com IndexedDB</li>
+        <li>Lighthouse Score ≥ 90 em todas as categorias</li>
+        <li>RGPD: aviso de cookies, gestão de consentimento</li>
+        <li>Autenticação JWT com expiração segura</li>
+        <li>HTTPS obrigatório em todo o tráfego</li>
+        <li>Backup automático de progresso do utilizador</li>
+        <li class="pending">Auditoria de segurança externa (prevista)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">RED <span>·</span> Produção Técnica</div>
+  <div class="fr">
+    RED-IGI · DOC-002 · Abril 2026<br>
+    Desenvolvimento técnico do recurso<br>
+    Interatividade · Acessibilidade · Design<br>
+    Contexto Lusófono · Portugal
+  </div>
+</footer>
+
+</body>
+</html>
